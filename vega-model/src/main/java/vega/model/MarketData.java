@@ -16,7 +16,6 @@ import java.util.Date;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @MappedSuperclass
-@EntityListeners(value = { AuditEntityListener.class })
 
 public class MarketData extends BaseEntity{
 

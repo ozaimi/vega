@@ -15,8 +15,7 @@
         <module>../vega-business</module>
         <module>../vega-repository</module>
         <module>../vega-web</module>
-        <module>../vega-host</module>
-        <module>../spring-boot-daemon-integration</module>
+
     </modules>
 
     <parent>
@@ -24,6 +23,15 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.3.1.RELEASE</version>
     </parent>
+
+
+
+    <scm>
+        <url>https://github.com/ozvega/vega.git</url>
+        <connection>scm:git:git@github.com/ozvega/vega.git</connection>
+        <developerConnection>scm:git:git@github.com/ozvega/vega.git</developerConnection>
+    </scm>
+
 
     <dependencies>
         <dependency>
@@ -48,10 +56,45 @@
 
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+
+                    <doCheck>false</doCheck>
+                    <doUpdate>true</doUpdate>
+
+                    <format>{0,date,yyyy-MM-dd HH:mm:ss}</format>
+                    <items>
+                        <item>timestamp</item>
+                    </items>
+                </configuration>
+
+            </plugin>
+
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <SCM-Revision>${buildNumber}</SCM-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>

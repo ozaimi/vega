@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class Application  extends SpringBootServletInitializer { //add  extends SpringBootServletInitializer
+public class Application   extends SpringBootServletInitializer{
+        //extends SpringBootServletInitializer { //add  extends SpringBootServletInitializer
 
 
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

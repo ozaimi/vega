@@ -13,8 +13,8 @@
     <groupId>vega</groupId>
     <artifactId>vega-web</artifactId>
     <!-- added for tomcat-->
-    <!--<packaging>war</packaging>-->
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
+
 
     <dependencies>
 
@@ -53,6 +53,11 @@
 
     <build>
         <plugins>
+
+
+
+
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -65,6 +70,20 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <SCM-Revision>${buildNumber}</SCM-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
 
 
 
