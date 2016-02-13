@@ -1,19 +1,13 @@
 package vega.web;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.*;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import vega.Application;
 import vega.model.MarketData;
 import vega.service.MarketDataService;
 
@@ -32,7 +26,7 @@ public class MarketDataControllerTest {
     @Mock
     private MarketDataService marketDataService;
 
-    @Before
+    @BeforeClass
     public void setUp(){
         MockitoAnnotations.initMocks(this);
     }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Custom suite" parallel="methods">
+  
+  </parameter> <!-- parallel -->
+  <test verbose="1" name="vega">
+    <groups>
+      <run>
+        <include name="fast"/>
+      </run>
+    </groups>
+   
+  </test> <!-- vega -->
+</suite> <!-- Custom suite -->

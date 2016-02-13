@@ -1,22 +1,26 @@
 package vega.web;
 
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.security.web.FilterChainProxy;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import vega.Application;
-import vega.security.SecurityConfig;
+
 
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,12 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {Application.class,MarketDataServiceMockConfig.class})
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-
-public class MarketDataControllerIntegrationTest {
+@TestExecutionListeners(inheritListeners = false, listeners = {
+        DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class })
+public class MarketDataControllerIntegrationTest extends AbstractTestNGSpringContextTests {
 
 
     private MockMvc mockMvc;
@@ -41,7 +46,7 @@ public class MarketDataControllerIntegrationTest {
     @Autowired
     private WebApplicationContext wac;
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).dispatchOptions(true).addFilters(filterChainProxy).build();
     }

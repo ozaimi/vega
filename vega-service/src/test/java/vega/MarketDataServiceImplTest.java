@@ -1,8 +1,7 @@
 package vega;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Categories;
-import org.junit.experimental.categories.Category;
+
+import org.testng.annotations.Test;
 import vega.model.MarketData;
 import vega.service.MarketDataService;
 import vega.service.MarketDataServiceImpl;
@@ -12,15 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-
-@Category(FastTests.class)
+@Test(groups = "fast",sequential = false)
 public class MarketDataServiceImplTest {
 
-    @Test
+
     public void findMarketDataByDefId_whenCalled_returnCorrectData() {
 
         // Arrange
