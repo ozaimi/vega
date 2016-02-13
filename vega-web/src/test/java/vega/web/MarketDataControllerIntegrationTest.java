@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestExecutionListeners(inheritListeners = false, listeners = {
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class })
+@Test(groups="slow")
 public class MarketDataControllerIntegrationTest extends AbstractTestNGSpringContextTests {
 
 

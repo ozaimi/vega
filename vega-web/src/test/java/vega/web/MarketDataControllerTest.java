@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import static org.mockito.Matchers.*;
 
-
+@Test(groups="fast")
 public class MarketDataControllerTest {
 
     @InjectMocks
