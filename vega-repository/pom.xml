@@ -23,10 +23,35 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>1.3.1.RELEASE</version>
+        </dependency>
 
 
+        <dependency>
+            <groupId>vega</groupId>
+            <artifactId>vega-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
     </dependencies>
+
+
+    <build>
+
+        <resources>
+            <resource>
+                <directory>../configuration</directory>
+            </resource>
+        </resources>
+
+    </build>
 
 </project>
