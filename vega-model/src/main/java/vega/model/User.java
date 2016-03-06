@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "T_USER")
+@Table(name = "app_user")
 @Getter  @Setter
 public class User {
 
@@ -19,6 +19,6 @@ public class User {
     @Column(name = "version",nullable = false)
     private long version;
 
-    @Column(name = "name",nullable = false,length = 50)
-    private String name;
+    @Column(name = "username",nullable = false,length = 50)
+    private String userName;
 }
