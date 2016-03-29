@@ -1,14 +1,61 @@
 package vega.web;
 
-import cucumber.api.PendingException;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import vega.Application;
 
-public class MyStepdefs {
+
+//@SpringApplicationConfiguration(classes = {Application.class,MarketDataServiceMockConfig.class})
+@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = {Application.class, MarketDataServiceMockConfig.class})
+@WebIntegrationTest({"server.port=0", "management.port=0"})
+@TestExecutionListeners(inheritListeners = false, listeners = {
+        DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class})
+
+public class MyStepdefs extends AbstractTransactionalTestNGSpringContextTests {
+
+    private MockMvc mockMvc;
+    @Autowired
+    private FilterChainProxy filterChainProxy;
+
+
+    @Autowired
+    private WebApplicationContext wac;
+
+    @Before
+    public void setUp() {
+
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).dispatchOptions(true).addFilters(filterChainProxy).build();
+
+
+
+    }
 
     @Given("^there are (\\d+) cucumbers      # <start> replaced with (\\d+)$")
     public void thereAreCucumbersStartReplacedWith(int arg0, int arg1) throws Throwable {
+
         // Write code here that turns the phrase above into concrete actions
         //throw new PendingException();
 
