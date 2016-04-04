@@ -32,9 +32,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringApplicationConfiguration(classes = {Application.class,MarketDataServiceMockConfig.class})
 @WebIntegrationTest({"server.port=0", "management.port=0"})
-@TestExecutionListeners(inheritListeners = false, listeners = {
+/*@TestExecutionListeners(inheritListeners = false, listeners = {
         DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class })
+        DirtiesContextTestExecutionListener.class })*/
 @Test(groups="slow")
 public class MarketDataControllerIntegrationTest extends AbstractTestNGSpringContextTests {
 

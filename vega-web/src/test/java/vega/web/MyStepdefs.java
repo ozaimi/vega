@@ -22,21 +22,23 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import vega.Application;
 
 
 //@SpringApplicationConfiguration(classes = {Application.class,MarketDataServiceMockConfig.class})
-@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = {Application.class, MarketDataServiceMockConfig.class})
-@WebIntegrationTest({"server.port=0", "management.port=0"})
+@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = {Application.class})
+@WebIntegrationTest(value = {"server.port=0", "management.port=0"},randomPort = true)
 @TestExecutionListeners(inheritListeners = false, listeners = {
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class})
 
-public class MyStepdefs extends AbstractTransactionalTestNGSpringContextTests {
+public class MyStepdefs extends AbstractTestNGSpringContextTests {
 
     private MockMvc mockMvc;
+
     @Autowired
     private FilterChainProxy filterChainProxy;
 
@@ -44,10 +46,8 @@ public class MyStepdefs extends AbstractTransactionalTestNGSpringContextTests {
     @Autowired
     private WebApplicationContext wac;
 
-    @Before
+    @BeforeClass
     public void setUp() {
-
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).dispatchOptions(true).addFilters(filterChainProxy).build();
 
 
 
@@ -55,6 +55,8 @@ public class MyStepdefs extends AbstractTransactionalTestNGSpringContextTests {
 
     @Given("^there are (\\d+) cucumbers      # <start> replaced with (\\d+)$")
     public void thereAreCucumbersStartReplacedWith(int arg0, int arg1) throws Throwable {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).dispatchOptions(true).addFilters(filterChainProxy).build();
+
 
         // Write code here that turns the phrase above into concrete actions
         //throw new PendingException();

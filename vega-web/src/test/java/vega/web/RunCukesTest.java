@@ -15,7 +15,11 @@ import org.testng.annotations.Test;
 import vega.Application;
 
 
-@CucumberOptions(plugin = "json:target/cucumber-report.json")
-@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = {Application.class, MarketDataServiceMockConfig.class})
+@CucumberOptions(plugin = "json:target/cucumber-report.json" ,monochrome = true)
+//@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = {Application.class, MarketDataServiceMockConfig.class})
+@WebIntegrationTest({"server.port=0", "management.port=0"})
+@TestExecutionListeners(inheritListeners = false, listeners = {
+        DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class})
 public class RunCukesTest extends AbstractTestNGCucumberTests {
 }
