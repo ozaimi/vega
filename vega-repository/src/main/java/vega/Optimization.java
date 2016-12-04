@@ -39,7 +39,7 @@ public class Optimization {
     public void process() {
 
         try {
-            Reader in = new FileReader("C:\\Users\\ozaimi\\Downloads\\hsi.csv");
+            Reader in = new FileReader("C:\\Users\\ozaimi\\Downloads\\dax.csv");
 
             Iterable<CSVRecord> records = CSVFormat.RFC4180.withSkipHeaderRecord().withHeader(Headers.class).parse(in);
             SimpleDateFormat parserSDF = new SimpleDateFormat("yyyy-MM-dd");
@@ -103,8 +103,15 @@ public class Optimization {
             for(int lev=1;lev<=1;lev++) {
                 System.out.println("lev "+lev);
                 for (int i = 1990; i <= 2014; i++) {
+
+                    if(lev==1 && i==2006){
+                        int ii=0;
+                    }
                     PerfDeal perf = getGlobalPerf(dataByMonthYear, 3, 0, i, lev,isLong);
-                   // PerfDeal perf = getGlobalPerf(dataByMonthYear, 11,0, i, lev,isLong);
+                   for(Deal d : perf.getDeals()){
+                       System.out.println(d);
+                   }
+                    // PerfDeal perf = getGlobalPerf(dataByMonthYear, 11,0, i, lev,isLong);
                     Perf perfM = new Perf(5, 10, perf.getPerf(), i, 2015 - i, 0d, perf.getDeals());
                     perfsOptim.add(perfM);
                     perfM.computePerf();
@@ -235,6 +242,15 @@ public class Optimization {
         public void computePerf() {
             avgPerf = (getAveragePerf()-1d)*100;
         }
+    }
+
+
+    private double computeDrawdown(){
+
+
+        
+
+        return -1;
     }
 
     private void buildData(SimpleDateFormat parserSDF, List<Data> data, CSVRecord record) throws ParseException {
