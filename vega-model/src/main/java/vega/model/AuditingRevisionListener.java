@@ -10,7 +10,7 @@ public class AuditingRevisionListener implements RevisionListener {
 
         AuditedRevisionEntity auditedRevisionEntity = (AuditedRevisionEntity) revisionEntity;
 
-      //  String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+       // String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
         auditedRevisionEntity.setUser("omar");
     }

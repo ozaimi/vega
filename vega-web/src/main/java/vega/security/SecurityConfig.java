@@ -30,11 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
                .and()
                .anonymous().disable();
 
-       /* http
-                .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/login").permitAll();*/
-
     }
 
     @Override
